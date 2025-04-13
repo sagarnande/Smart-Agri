@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Farming related business</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: AgriCulture
+  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    .tech {
+        text-align: center;
+        margin: 75px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    @media (max-width: 600px) {
+        .tech ,
+        .prodcutsearch {
+            margin: 10px;
+            padding: 15px;
+        }
+    }
+  </style>
+</head>
+
+<body class="about-page">
+  <header id="header" class="header d-flex align-items-center position-relative">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" alt="AgriCulture">
+        </a>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+              <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('products') }}">Products</a></li>
+                <li><a href="{{ url_for('services') }}">Our Services</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('login') }}">Log in</a></li>
+            </ul>
+
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+    </div>
+</header>
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/about.jpg);">
+      <div class="container position-relative">
+        <h1>Farming related businesses</h1>
+        <p>Improving farming field with various farming related businesses</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li class="current">Farming related businesses</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+    
+ <!-- About 3 Section -->
+<section id="about-3" class="about-3 section">
+    <div class="tech">
+        <h2 class="content-title mb-4">Improving farming with related businesses</h2>
+        <p class="mb-4">
+            Agriculture extends far beyond just growing crops; it is a vast business ecosystem that includes production, processing, supply chain management, marketing, and value-added services. 
+            By integrating farming with related businesses, farmers can increase profitability, reduce risks, and create sustainable agricultural enterprises. This approach not only enhances the economic viability of farming but also ensures food security, reduces post-harvest losses, and promotes rural development.        </p>
+    </div>
+</section><!-- /About 3 Section -->
+
+ <!-- High-Value Crop Farming & Processing Section -->
+<section id="about-3" class="about-3 section">
+  <div class="container">
+      <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">High-Value Crop Farming & Processing</h2>
+              <p class="mb-4">
+                  Growing premium crops that have higher market demand and processing them for better profits.
+              </p>
+              <p>
+                  1. Exotic Fruits & Vegetables Farming – Growing dragon fruit, kiwi, saffron, blueberries, and asparagus for premium pricing. <br>
+                  2. Medicinal & Aromatic Plants – Cultivating herbs like ginseng, lavender, basil, and lemongrass for cosmetics, medicines, and essential oils. <br>
+                  3. Specialty Tea & Coffee Farming – Growing and branding organic green tea, herbal tea, and specialty coffee beans. <br>
+                  4. Gourmet Mushroom Farming – Producing high-value mushrooms like oyster, shiitake, and truffles for restaurants and health-conscious consumers. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.fao.org/3/i2592e/i2592e.pdf">FAO High-Value Crop Farming Guide</a><br>
+                  <a href="https://www.agriculture.gov.au/ag-farm-food/crops/processing">Processing Techniques for Premium Crops</a>
+              </p>
+          </div>
+          <div class="col-lg-5 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Organic & Natural Product Business</h2>
+              <p class="mb-4">
+                  Processing farm products into premium organic goods increases profit margins significantly.
+              </p>
+              <p>
+                  1. Cold-Pressed Oils Business – Extracting high-quality mustard, groundnut, and coconut oil for direct sales. <br>
+                  2. Natural Fertilizer & Bio-Pesticides – Producing vermicompost, cow dung manure, and organic pesticides for sustainable farming. <br>
+                  3. Organic Snacks & Superfoods – Selling organic millet, quinoa, and dried fruit snacks under private labels. <br>
+                  4. Herbal & Ayurvedic Products – Producing plant-based skincare, medicinal oils, and herbal powders. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.ams.usda.gov/services/organic-certification">USDA Organic Certification Standards</a><br>
+                  <a href="https://www.epa.gov/safepestcontrol/organic-pesticides">EPA Guide to Organic Pesticides</a>
+              </p>
+          </div>
+      </div>
+  </div>
+</section><!-- /High-Value Crop Farming & Processing Section -->
+
+<!-- Livestock-Based Business Expansion Section -->
+<section id="about-3" class="about-3 section">
+  <div class="container">
+      <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-5 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Livestock-Based Business Expansion</h2>
+              <p class="mb-4">
+                  Beyond traditional dairy and poultry farming, value addition and direct sales can increase profits.
+              </p>
+              <p>
+                  1. Dairy Product Processing – Making yogurt, flavored milk, A2 ghee, and cheese. <br>
+                  2. Meat Processing Business – Selling packaged goat meat, free-range chicken, and premium pork. <br>
+                  3. Goat & Sheep Farming for Wool & Meat – Selling premium wool, organic mutton, and leather. <br>
+                  4. Fish & Prawn Farming – Producing high-demand seafood like tilapia, catfish, and freshwater prawns. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.fao.org/dairy-production-products/en/">FAO Dairy Production Guide</a><br>
+                  <a href="https://www.fsis.usda.gov/">USDA Meat Processing Standards</a>
+              </p>
+          </div>
+          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Agri-Tourism & Farm-Based Experiences</h2>
+              <p class="mb-4">
+                  Turning farms into tourist and educational hubs is a high-profit and low-investment model.
+              </p>
+              <p>
+                  1. Farm Stay & Agro-Tourism – Hosting visitors for farm tours, camping, and rural experiences. <br>
+                  2. Petting Zoos & Family Farms – Attracting school groups and families for farm activities. <br>
+                  3. Organic Food Cafés & Farm Restaurants – Selling fresh farm-to-table meals. <br>
+                  4. Training & Farming Workshops – Teaching organic farming, composting, and rural entrepreneurship. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.ruraldevelopment.org/agritourism/">Guide to Starting an Agri-Tourism Business</a><br>
+                  <a href="https://www.nal.usda.gov/afsic/agritourism">Farm-Based Experience Ideas</a>
+              </p>
+          </div>
+      </div>
+  </div>
+</section><!-- /Agri-Tourism & Farm-Based Experiences Section -->
+
+<!-- Seed Production & Nursery Business Section -->
+<section id="about-3" class="about-3 section">
+  <div class="container">
+      <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Seed Production & Nursery Business</h2>
+              <p class="mb-4">
+                  Providing quality seeds and plants can generate consistent high-margin profits.
+              </p>
+              <p>
+                  1. Hybrid Seed Production & Sale – Selling improved and disease-resistant crop seeds. <br>
+                  2. Grafted Fruit Plants & Saplings – Growing and selling mango, citrus, and apple saplings. <br>
+                  3. Greenhouse & Polyhouse Farming – Producing off-season vegetables and high-value flowers. <br>
+                  4. Bonsai & Ornamental Plant Sales – Selling decorative and medicinal plants in urban markets. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.fao.org/3/y5169e/y5169e00.htm">FAO Seed Production Best Practices</a><br>
+                  <a href="https://www.nal.usda.gov/afsic/greenhouse-farming">Greenhouse Farming Techniques</a>
+              </p>
+          </div>
+          <div class="col-lg-5 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Post-Harvest & Supply Chain Businesses</h2>
+              <p class="mb-4">
+                  Investing in storage, logistics, and branding can significantly increase profitability.
+              </p>
+              <p>
+                  1. Cold Storage & Warehouse Leasing – Providing storage for perishable fruits, vegetables, and dairy. <br>
+                  2. Agri-Logistics & Farm-to-Market Transport – Offering direct delivery of farm produce to consumers. <br>
+                  3. Branding & Packaging of Farm Products – Selling farm-grown spices, grains, and dried fruits in premium packaging. <br>
+                  4. Exporting Agri-Products – Selling processed foods, organic products, and exotic crops globally. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.fao.org/3/y4256e/y4256e00.htm">FAO Post-Harvest Management Guide</a><br>
+                  <a href="https://www.worldbank.org/en/topic/agriculture/brief/agri-logistics">Agri-Logistics Best Practices</a>
+              </p>
+          </div>
+      </div>
+  </div>
+</section><!-- /Post-Harvest & Supply Chain Businesses Section -->
+
+<!-- High-Demand Export-Oriented Businesses Section -->
+<section id="about-3" class="about-3 section">
+  <div class="container">
+      <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-5 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">High-Demand Export-Oriented Businesses</h2>
+              <p class="mb-4">
+                  Farmers can leverage international demand to earn higher profits.
+              </p>
+              <p>
+                  1. Organic Spice Export Business – Selling turmeric, black pepper, and saffron to international markets. <br>
+                  2. Premium Rice & Grain Exports – Exporting Basmati rice, quinoa, and organic pulses. <br>
+                  3. Processed & Dried Fruit Exports – Selling dehydrated mangoes, berries, and dates. <br>
+                  4. Handmade Natural Agro-Based Products – Producing handmade soaps, herbal teas, and natural textiles from farm products. <br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.trade.gov/exporting-agricultural-products">Exporting Agricultural Products Guide</a><br>
+                  <a href="https://www.fao.org/international-trade/en/">International Market Access for Farmers</a>
+              </p>
+          </div>
+          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="content-title mb-4">Agri-Based Handicrafts & Rural Artisanal Products</h2>
+              <p class="mb-4">
+                  Utilizing farm waste and natural resources to create handmade products for local and international markets.
+              </p>
+              <p>
+                  1. Bamboo & Cane Handicrafts – Creating baskets, furniture, and eco-friendly home décor from bamboo and cane. <br>
+                  2. Handmade Jute & Cotton Products – Producing jute bags, mats, and cotton-based eco-friendly clothing. <br>
+                  3. Natural Dyes & Fabric Printing – Extracting dyes from plants like indigo, turmeric, and henna for organic textile printing. <br>
+                  4. Clay & Terracotta Pottery – Crafting decorative pots, utensils, and garden décor items using locally available clay. <br><br>
+              </p>
+              <p>
+                  <strong>Documentation Links:</strong><br>
+                  <a href="https://www.unesco.org/artisanal-handicrafts">Guide to Creating Handicrafts from Farm Waste</a><br>
+                  <a href="https://www.ilo.org/global/topics/green-jobs/WCMS_558577/lang--en/index.htm">Sustainable Practices in Artisanal Production</a>
+              </p>
+          </div>
+      </div>
+  </div>
+</section><!-- /About 3 Section -->
+
+</main>
+
+<footer id="footer" class="footer dark-background">
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">AgriCulture</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hic solutasetp</h4>
+          <ul>
+            <li><a href="#">Molestiae accusamus iure</a></li>
+            <li><a href="#">Excepturi dignissimos</a></li>
+            <li><a href="#">Suscipit distinctio</a></li>
+            <li><a href="#">Dilecta</a></li>
+            <li><a href="#">Sit quas consectetur</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Nobis illum</h4>
+          <ul>
+            <li><a href="#">Ipsam</a></li>
+            <li><a href="#">Laudantium dolorum</a></li>
+            <li><a href="#">Dinera</a></li>
+            <li><a href="#">Trodelas</a></li>
+            <li><a href="#">Flexo</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright text-center">
+    <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+      <div class="d-flex flex-column align-items-center align-items-lg-start">
+        <div>
+          © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+
+      <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+<!-- Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

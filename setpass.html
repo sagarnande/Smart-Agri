@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Set New Password - AgriCulture</title>
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .btn-custom {
+      width: 100%;
+      padding: 10px;
+      background-color: #065318;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .whyproduct {
+      text-align: center;
+      margin: 55px 0;
+    }
+  </style>
+</head>
+
+<body class="contact-page">
+
+  <header id="header" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logo.png" alt="AgriCulture">
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Log in</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-title dark-background" style="background-image: url(assets/img/contact.jpg);">
+      <div class="container">
+        <h1>Set New Password</h1>
+        <p>Home / Set New Password</p>
+      </div>
+    </div>
+
+    <section id="set-password" class="contact section">
+      <div class="container">
+        <div class="whyproduct">
+          <h2>Create a New Password</h2>
+          <p>Enter your new password to reset your account access.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <form id="setPasswordForm">
+              <div class="form-group">
+                <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter New Password" required>
+              </div>
+
+              <div class="form-group mt-3">
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm New Password" required>
+              </div>
+
+              <div class="text-center mt-3">
+                <button type="button" class="btn-custom" id="resetPassword">Reset Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container text-center">
+      <p>© Copyright <strong>AgriCulture</strong>. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('resetPassword').addEventListener('click', function () {
+      let newPassword = document.getElementById('newPassword').value;
+      let confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (newPassword.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        alert("Passwords do not match! Please try again.");
+        return;
+      }
+
+      alert("Password successfully reset!");
+      window.location.href = "login.html"; // Redirect to login page immediately
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Sign Up - AgriCulture</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <style>
+        .btn-custom {
+            width: 100%;
+            padding: 10px;
+            background-color: #065318;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #043a12;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #065318;
+            box-shadow: 0 0 5px rgba(6, 83, 24, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main">
+        <section id="signup" class="contact section">
+            <div class="container">
+                <div class="whyproduct text-center">
+                    <h2 class="content-title mb-4">Create Your Account</h2>
+                    <p>Join us to explore the best agricultural solutions. Register now to track orders, access personalized recommendations, and stay updated on the latest innovations in farming technology!</p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <form id="signupForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="password" class="form-control" id="cur_password" placeholder="Confirm Password" required>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button type="button" class="btn-custom" onclick="signupUser ()">Sign Up</button>
+                            </div>
+                            <div class="text-center mt-3">
+                                <p>Already have an account? <a href="{{url_for('login')}}">Log in</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function signupUser () {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let cur_password = document.getElementById('cur_password').value;
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            if (password !== cur_password) {
+                alert("Passwords do not match! Please try again.");
+                return;
+            }
+
+            // Log the data being sent
+            console.log({
+                name: name,
+                email: email,
+                password: password,
+                cur_password: cur_password
+            });
+
+            // Send data to backend using fetch
+            fetch("/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert("Signup successful! Redirecting to login page.");
+                    window.location.href = "/login";
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Guidelines</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .chat-container h2 {
+      font-size: 28px;
+      padding-left: 180px;
+      padding-right: 100px;
+      padding-bottom: 30px;
+    }
+
+    .container1 {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .container1 h1 {
+      font-size: 32px;
+    }
+
+    .whyproduct {
+      text-align: center;
+      margin: 55px;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+
+    .chat-container {
+      margin-top: 20px;
+      padding: 12px;
+    }
+
+    .chat-message {
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .chat-message:nth-child(odd) {
+      background-color: #f1f1f1; /* Light background for odd messages */
+    }
+
+    .chat-message:nth-child(even) {
+      background-color: #e1f5fe; /* Light background for even messages */
+    }
+
+    #sendChat {
+      padding: 10px;
+    }
+
+    .loading {
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .loading span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 0 2px;
+      border-radius: 50%;
+      background: #007bff;
+      animation: loading 0.6s infinite alternate;
+    }
+
+    .loading span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.5);
+      }
+    }
+  </style>
+</head>
+
+<body class="about-page">
+  <header id="header" class="header d-flex align-items-center position-relative">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="AgriCulture">
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('products') }}">Products</a></li>
+          <li><a href="{{ url_for('services') }}">Our Services</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+          <li><a href="{{ url_for('login') }}">Log in</a></li>
+        </ul>
+
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/guidance.jpeg);">
+      <div class="container position-relative">
+        <h1>Guidance</h1>
+        <p>Guidance for the new learners or farmers</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Guidance</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <div class="whyproduct">
+      <h2 class="content-title mb-4">Providing the guidance for farmers </h2>
+      <p class="mb-4">
+        Our website provides essential agricultural guidance by answering farmers' questions, helping them make informed decisions based on weather, soil conditions, and best practices. This support improves crop yield, reduces risks, and promotes sustainable farming. Accurate and timely advice ensures better resource management and productivity. Such guidance is crucial for food security, economic growth, and environmental sustainability.
+      </p>
+    </div>
+
+    <div class="chat-container container1">
+      <h2> Ask any question i will provide guidance : </h2>
+      
+      <div id="chatMessages" class="chat-messages"></div>
+      <br>
+      <div class="input-group">
+        <input type="text" id="chatInput" class="form-control" placeholder="Ask about farming...">
+        <button id="sendChat" class="btn btn-primary">
+          <span id="buttonText">Send</span>
+        </button>
+      </div>
+    </div>
+    <br><br>
+    <script>
+      const COHERE_API_KEY = 'riyXcV8DUJGIskppNKAW9wtAg1MK21PixI3kOiSs'; // Replace with your actual API key
+      const chatInput = document.getElementById('chatInput');
+      const sendChat = document.getElementById('sendChat');
+      const chatMessages = document.getElementById('chatMessages');
+
+      // Array to store chat messages
+      let chatHistory = [];
+
+      // Function to handle sending messages
+      async function handleSendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+          appendMessage('You', message);
+          chatInput.value = ''; // Clear input after sending
+          appendLoadingIndicator(); // Show loading indicator
+          const response = await getCohereChatResponse(message);
+          removeLoadingIndicator(); // Remove loading indicator
+          appendMessage('AI', formatResponse(response)); // Format and append the response
+        }
+      }
+
+      // Send chat message on button click
+      sendChat.addEventListener('click', handleSendMessage);
+
+      // Send chat message on Enter key press
+      chatInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent form submission
+          handleSendMessage();
+        }
+      });
+
+      // Append message to chat
+      function appendMessage(sender, message) {
+        const messageObj = { sender, message };
+        chatHistory.push(messageObj);
+        renderChatHistory();
+      }
+
+      // Append loading indicator to chat
+      function appendLoadingIndicator() {
+        const loadingMessage = document.createElement('div');
+        loadingMessage.classList.add('chat-message');
+        loadingMessage.innerHTML = `<strong>AI:</strong> <span class="loading"><span></span><span></span><span></span></span>`;
+        chatMessages.appendChild(loadingMessage);
+      }
+
+      // Remove loading indicator from chat
+      function removeLoadingIndicator() {
+        const loadingMessages = chatMessages.getElementsByClassName('chat-message');
+        if (loadingMessages.length > 0) {
+          chatMessages.removeChild(loadingMessages[loadingMessages.length - 1]);
+        }
+      }
+
+      // Render chat history
+      function renderChatHistory() {
+        chatMessages.innerHTML = ''; // Clear current messages
+        chatHistory.forEach(msg => {
+          const messageDiv = document.createElement('div');
+          messageDiv.classList.add('chat-message'); // Add a class for styling
+          messageDiv.innerHTML = `<strong>${msg.sender}:</strong> ${msg.message}`; // Use innerHTML for formatting
+          chatMessages.appendChild(messageDiv);
+        });
+      }
+
+      // Get response from Cohere API
+      async function getCohereChatResponse(userMessage) {
+        try {
+          const response = await fetch('https://api.cohere.ai/v1/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${COHERE_API_KEY}`
+            },
+            body: JSON.stringify({
+              model: 'command-r-08-2024',
+              message: userMessage,
+              temperature: 0.7,
+              chat_history: [],
+              prompt_truncation: 'AUTO'
+            })
+          });
+
+          if (!response.ok) throw new Error('Failed to fetch response from Cohere API');
+
+          const data = await response.json();
+          return data.text; // Assuming the response contains a 'text' field with the response
+        } catch (error) {
+          console.error('Cohere API error:', error);
+          return 'Sorry, I could not get a response. Please try again.';
+        }
+      }
+
+      // Format the API response for better readability
+      function formatResponse(response) {
+        // Replace newlines with <br> for line breaks
+        let formattedResponse = response.replace(/\n/g, '<br>');
+
+        // Replace bullet points with <li> for lists
+        formattedResponse = formattedResponse
+          .replace(/•/g, '<li>') // Replace bullet points with <li>
+          .replace(/(<li>.*?<\/li>)/g, '<ul>$1</ul>'); // Wrap list items in <ul>
+
+        // Make URLs clickable
+        formattedResponse = formattedResponse.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+
+        return formattedResponse;
+      }
+    </script>
+
+   
+<footer id="footer" class="footer dark-background">
+
+  <div class="footer-top">
+      <div class="container">
+          <div class="row gy-4">
+              <div class="col-lg-4 col-md-6 footer-about">
+                  <a href="index.html" class="logo d-flex align-items-center">
+                      <span class="sitename">AgriCulture</span>
+                  </a>
+                  <div class="footer-contact pt-3">
+                      <p>A108 Adam Street</p>
+                      <p>New York, NY 535022</p>
+                      <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                      <p><strong>Email:</strong> <span>info@example.com</span></p>
+                  </div>
+              </div>
+
+              <div class="col-lg-2 col-md-3 footer-links">
+                  <h4>Useful Links</h4>
+                  <ul>
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">About us</a></li>
+                      <li><a href="#">Services</a></li>
+                      <li><a href="#">Terms of service</a></li>
+                      <li><a href="#">Privacy policy</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-2 col-md-3 footer-links">
+                  <h4>Our Services</h4>
+                  <ul>
+                      <li><a href="#">Web Design</a></li>
+                      <li><a href="#">Web Development</a></li>
+                      <li><a href="#">Product Management</a></li>
+                      <li><a href="#">Marketing</a></li>
+                      <li><a href="#">Graphic Design</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-2 col-md-3 footer-links">
+                  <h4>Hic solutasetp</h4>
+                  <ul>
+                      <li><a href="#">Molestiae accusamus iure</a></li>
+                      <li><a href="#">Excepturi dignissimos</a></li>
+                      <li><a href="#">Suscipit distinctio</a></li>
+                      <li><a href="#">Dilecta</a></li>
+                      <li><a href="#">Sit quas consectetur</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-2 col-md-3 footer-links">
+                  <h4>Nobis illum</h4>
+                  <ul>
+                      <li><a href="#">Ipsam</a></li>
+                      <li><a href="#">Laudantium dolorum</a></li>
+                      <li><a href="#">Dinera</a></li>
+                      <li><a href="#">Trodelas</a></li>
+                      <li><a href="#">Flexo</a></li>
+                  </ul>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+  <div class="copyright text-center">
+      <div
+          class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+          <div class="d-flex flex-column align-items-center align-items-lg-start">
+              <div>
+                  © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+              </div>
+              <div class="credits">
+                  <!-- All the links in the footer should remain intact. -->
+                  <!-- You can delete the links only if you purchased the pro version. -->
+                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                  <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+          </div>
+
+          <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+
+      </div>
+  </div>
+
+</footer>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+<!-- Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

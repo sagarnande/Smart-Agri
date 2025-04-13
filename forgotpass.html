@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Forgot Password - AgriCulture</title>
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .btn-custom {
+      width: 100%;
+      padding: 10px;
+      background-color: #065318;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .whyproduct {
+      text-align: center;
+      margin: 55px 0;
+    }
+  </style>
+</head>
+
+<body class="contact-page">
+
+  <header id="header" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logo.png" alt="AgriCulture">
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{{url_for('home')}}">Home</a></li>
+          <li><a href="login.html">Log in</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-title dark-background" style="background-image: url(assets/img/contact.jpg);">
+      <div class="container">
+        <h1>Forgot Password</h1>
+        <p>Home / Forgot Password</p>
+      </div>
+    </div>
+
+    <section id="forgot-password" class="contact section">
+      <div class="container">
+        <div class="whyproduct">
+          <h2>Reset Your Password</h2>
+          <p>Enter your registered phone number, and we'll send an OTP to reset your password.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <form id="otpForm">
+              <div class="form-group">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Your Phone Number" required>
+              </div>
+
+              <div class="text-center mt-3">
+                <button type="button" class="btn-custom" id="sendOtp">Send OTP</button>
+              </div>
+
+              <div class="form-group mt-3" id="otpSection" style="display: none;">
+                <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP" required>
+              </div>
+
+              <div class="text-center mt-3" id="verifyBtnSection" style="display: none;">
+                <button type="button" class="btn-custom" id="verifyOtp">Verify & Reset Password</button>
+              </div>
+
+              <div class="text-center mt-3">
+                <p>Remembered your password? <a href="{{url_for('login')}}">Log in</a></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container text-center">
+      <p>© Copyright <strong>AgriCulture</strong>. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    let generatedOtp = null;
+
+    document.getElementById('sendOtp').addEventListener('click', function () {
+      let phone = document.getElementById('phone').value;
+
+      if (phone.length !== 10 || isNaN(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+      }
+
+      // Generate a 6-digit OTP
+      generatedOtp = Math.floor(100000 + Math.random() * 900000);
+      
+      // Simulate sending OTP
+      alert("OTP sent to " + phone + ": " + generatedOtp);
+
+      // Show OTP input field and verify button
+      document.getElementById('otpSection').style.display = 'block';
+      document.getElementById('verifyBtnSection').style.display = 'block';
+    });
+
+    document.getElementById('verifyOtp').addEventListener('click', function () {
+      let enteredOtp = document.getElementById('otp').value;
+
+      if (enteredOtp == generatedOtp) {
+        alert("OTP Verified! You can now reset your password.");
+        window.location.href = "{{url_for('setpass')}}"; // Redirect to reset password page
+      } else {
+        alert("Invalid OTP! Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>

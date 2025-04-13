@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Government Schema</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: AgriCulture
+  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<style>
+.whyproduct {
+        text-align: center;
+        margin: 75px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+</style>
+
+<body class="about-page">
+    <header id="header" class="header d-flex align-items-center position-relative">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="AgriCulture">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="{{ url_for('services') }}">Our Services</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                </ul>
+
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/schema.jpg);">
+            <div class="container position-relative">
+                <h1>Financial support</h1>
+                <p>Providing financial support for farmers</p>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="current">Financial support</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+      
+        <div class="whyproduct">
+            <h2 class="content-title mb-4">Provide the financial support for farmers </h2>
+            <p class="mb-4">
+                Farmers are the backbone of any economy, as they ensure food security and contribute to national development. However, they often face financial challenges due to unpredictable weather, fluctuating market prices, rising input costs, and debt burdens. Providing financial 
+                support to farmers helps address these challenges and ensures sustainable agricultural growth.
+            </p>
+        </div>
+
+        <section id="loan-restructuring" class="loan-restructuring section">
+            <h3 style="padding-left: 120px;">Check Eligibility</h3>
+            <br> <br>
+            <div class="container">
+                <form id="loanForm">
+                    <div class="mb-3">
+                        <label for="loanType" class="form-label">Select Loan Type:</label>
+                        <select id="loanType" class="form-select" required onchange="showLoanDetails()">
+                            <option value="">-- Select Loan Type --</option>
+                            <option value="operating">Operating Loans</option>
+                            <option value="farmOwnership">Farm Ownership Loans</option>
+                            <option value="equipment">Equipment Loans</option>
+                            <option value="realEstate">Real Estate Loans</option>
+                            <option value="microloans">Microloans</option>
+                            <option value="conservation">Conservation Loans</option>
+                            <option value="emergency">Emergency Loans</option>
+                            <option value="youth">Youth Loans</option>
+                            <option value="storage">Farm Storage Facility Loans</option>
+                            <option value="valueAdded">Value-Added Producer Grants</option>
+                        </select>
+                    </div>
+
+                    <div id="loanDetails" class="mb-3" style="display: none;">
+                        <h4>Loan Details:</h4>
+                        <p id="detailsText"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="income" class="form-label">Annual Income (₹):</label>
+                        <input type="number" id="income" class="form-control" placeholder="Enter your income" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="loanAmount" class="form-label">Current Loan Amount (₹):</label>
+                        <input type="number" id="loanAmount" class="form-control" placeholder="Enter loan amount" required oninput="calculateInterest()">
+                    </div>
+
+                    <div id="interestResult" class="mb-3" style="display: none;">
+                        <h4>Monthly Interest Amount:</h4>
+                        <p id="monthlyInterestText"></p>
+                    </div>
+
+                    <button type="button" class="btn btn-success" onclick="checkEligibility()">Check Eligibility</button>
+                </form>
+
+                <p id="result" class="mt-3" style="font-weight: bold; text-align: center;"></p>
+                <button id="applyLoan" class="btn btn-primary" style="display: none;" onclick="applyLoan()">Apply for Loan Restructuring</button>
+              
+            </div>
+        </section>
+    </main>
+
+
+   
+    <script>
+        function checkEligibility() {
+            let loanType = document.getElementById("loanType").value;
+            let income = parseFloat(document.getElementById("income").value);
+            let loanAmount = parseFloat(document.getElementById("loanAmount").value);
+            let result = document.getElementById("result");
+            let applyButton = document.getElementById("applyLoan");
+            let loanDetails = document.getElementById("loanDetails");
+            let detailsText = document.getElementById("detailsText");
+            let interestResult = document.getElementById("interestResult");
+            let monthlyInterestText = document.getElementById("monthlyInterestText");
+
+            if (loanType === "" || isNaN(income) || isNaN(loanAmount)) {
+                result.innerHTML = "⚠ Please fill all fields correctly!";
+                result.style.color = "red";
+                applyButton.style.display = "none";
+                loanDetails.style.display = "none";
+                interestResult.style.display = "none";
+                return;
+            }
+
+            let interestRates = {
+                "operating": 6.5,
+                "farmOwnership": 7.0,
+                "equipment": 6.8,
+                "realEstate": 7.2,
+                "microloans": 5.5,
+                "conservation": 6.0,
+                "emergency": 4.0,
+                "youth": 5.0,
+                "storage": 6.3,
+                "valueAdded": 6.9
+            };
+
+            let interestRate = interestRates[loanType];
+            let monthlyInterest = (loanAmount * (interestRate / 100)) / 12;
+
+            if (income < 200000 && loanAmount > 50000) {
+                result.innerHTML = "✅ You are eligible for loan restructuring!";
+                result.style.color = "green";
+                applyButton.style.display = "block";
+
+                detailsText.innerHTML = getLoanDetails(loanType);
+                loanDetails.style.display = "block";
+
+                monthlyInterestText.innerHTML = `Interest Rate: <strong>${interestRate}% per year</strong><br>
+                                                 Monthly Interest: <strong>₹ ${monthlyInterest.toFixed(2)}</strong>`;
+                interestResult.style.display = "block";
+            } else {
+                result.innerHTML = "❌ You are not eligible. Try applying for a different scheme.";
+                result.style.color = "red";
+                applyButton.style.display = "none";
+                loanDetails.style.display = "none";
+                interestResult.style.display = "none";
+            }
+        }
+
+        function getLoanDetails(loanType) {
+            const loanDetails = {
+                "operating": "Covers day-to-day operational costs like seeds, fertilizers, and livestock feed.",
+                "farmOwnership": "Used to purchase or enlarge family farms.",
+                "equipment": "Financing for purchasing agricultural equipment like tractors and harvesters.",
+                "realEstate": "For purchasing agricultural land or improving existing properties.",
+                "microloans": "Designed for small-scale farmers or new entrants to agriculture.",
+                "conservation": "To finance conservation practices and improvements on agricultural land.",
+                "emergency": "For farmers affected by natural disasters.",
+                "youth": "For young individuals (ages 10-20) to establish and operate income-producing projects.",
+                "storage": "To finance the construction or improvement of farm storage facilities.",
+                "valueAdded": "To help farmers develop new products or markets."
+            };
+            return loanDetails[loanType] || "";
+        }
+
+        function applyLoan() {
+            alert("Redirecting to loan application page...");
+        }
+        function applyLoan() {
+    let loanType = document.getElementById("loanType").value;
+    let applicationLinks = {
+        "operating": "https://www.sbi.co.in/web/agri-rural/agriculture-banking/loans/operating-loans",
+        "farmOwnership": "https://www.bankofbaroda.in/agriculture-banking/loans/farm-ownership-loans",
+        "equipment": "https://www.pnbindia.in/agriculture-loans/equipment-loans.html",
+        "realEstate": "https://www.canarabank.com/pages/real-estate-loans",
+        "microloans": "https://www.jkbank.com/loans/agriculture/microloans.php",
+        "conservation": "https://www.nabard.org/content1.aspx?id=23&catid=23",
+        "emergency": "https://www.sbi.co.in/web/agri-rural/agriculture-banking/miscellaneous-activities/scheme-for-debt-swapping-of-borrowers",
+        "youth": "https://www.pnbindia.in/agriculture-loans/youth-loans.html",
+        "storage": "https://en.wikipedia.org/wiki/Gramin_Bhandaran_Yojana",
+        "valueAdded": "https://mofpi.gov.in/en/Aatmanirbhar-Bharat/Operation-Greens-%28TOP-to-Total%29/application-template"
+    };
+
+    if (applicationLinks[loanType]) {
+        window.location.href = applicationLinks[loanType];
+    } else {
+        alert("Application link for the selected loan type is not available.");
+    }
+}
+
+    </script>
+
+  </main>
+    <footer id="footer" class="footer dark-background">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">AgriCulture</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p>A108 Adam Street</p>
+                            <p>New York, NY 535022</p>
+                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Product Management</a></li>
+                            <li><a href="#">Marketing</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Hic solutasetp</h4>
+                        <ul>
+                            <li><a href="#">Molestiae accusamus iure</a></li>
+                            <li><a href="#">Excepturi dignissimos</a></li>
+                            <li><a href="#">Suscipit distinctio</a></li>
+                            <li><a href="#">Dilecta</a></li>
+                            <li><a href="#">Sit quas consectetur</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Nobis illum</h4>
+                        <ul>
+                            <li><a href="#">Ipsam</a></li>
+                            <li><a href="#">Laudantium dolorum</a></li>
+                            <li><a href="#">Dinera</a></li>
+                            <li><a href="#">Trodelas</a></li>
+                            <li><a href="#">Flexo</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright text-center">
+            <div
+                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+                <div class="d-flex flex-column align-items-center align-items-lg-start">
+                    <div>
+                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        <!-- All the links in the footer should remain intact. -->
+                        <!-- You can delete the links only if you purchased the pro version. -->
+                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+
+                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

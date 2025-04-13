@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Market Places</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Tangram CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tangram/dist/tangram.min.css">
+
+    <!-- Leaflet CSS for proper map styling -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Leaflet JavaScript for map functionality -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Tangram JavaScript for advanced 3D mapping (if you're using it) -->
+    <script src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
+</head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+        }
+    
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+    
+        #map {
+            height: 500px;
+            width: 90%;
+            margin: 20px auto;
+            border-radius: 10px;
+            border: 2px solid #2c3e50;
+            overflow: hidden;
+            position: relative;
+        }
+    
+        #search-box-container {
+            display: flex;
+            justify-content: space-between; /* Position items on opposite sides */
+            align-items: center;
+            gap: 20px; /* Add some space between the left and right sections */
+            margin-bottom: 20px;
+            width: 90%;
+            margin: 0 auto;
+        }
+    
+        #left-section {
+            text-align: left; /* Align text to the left */
+            width: 60%; /* Occupy 60% of the container */
+        }
+    
+        #right-section {
+            text-align: left; /* Align text to the left */
+            width: 35%; /* Occupy 35% of the container */
+        }
+    
+        #city-input {
+            padding: 12px;
+            font-size: 16px;
+            width: 100%; /* Make the input take full width of the container */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    
+        button {
+            padding: 12px 18px;
+            font-size: 16px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Make the button take full width of the container */
+            margin-top: 10px; /* Add space above the button */
+        }
+    
+        button:hover {
+            background: #1a252f;
+        }
+    
+        #market-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding-top: 20px;
+        }
+    
+        .store-container {
+            flex: 1 1 calc(33% - 10px);
+            margin: 0 25px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f9f9f9;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s;
+        }
+    
+        .store-container:hover {
+            transform: translateY(-5px);
+        }
+    
+        .store-container p {
+            margin: 5px 0;
+        }
+    </style>
+
+<body class="about-page">
+    <header id="header" class="header d-flex align-items-center position-relative">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="AgriCulture">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="{{ url_for('services') }}">Our Services</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/market.jpeg);">
+            <div class="container position-relative">
+                <h1>Market Places</h1>
+                <p>Providing market places for farmers</p>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Schema</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+        <br><br>
+
+        
+<div id="search-box-container">
+    <!-- Left Section -->
+    <div id="left-section">
+        <h2>Find Agricultural Stores Near You</h2> <br>
+        <p>By providing a list of marketplaces specifically for agricultural products, this platform offers valuable support to farmers in finding the right buyers or suppliers for their produce. It eliminates the need for time-consuming searches and directly connects farmers to marketplaces where they can trade farm products, seeds, tools, and other agricultural goods. This ensures that the users can easily discover relevant places that help support their farming needs and contribute to their business growth. Ultimately, the goal is to provide a centralized,
+             easy-to-use resource for the agricultural community, boosting efficiency and fostering economic development within the sector.</p>
+    </div>
+
+    <!-- Right Section -->
+    <div id="right-section">
+        <input type="text" id="city-input" placeholder="Enter city name..." />
+        <button onclick="searchMarkets()">Search</button>
+    </div>
+</div>
+
+<div id="map"></div><br><br>
+<h3>Nearby Agricultural Stores (Within 50 km)</h3>
+<div id="market-list">Click the button to find stores near you.</div> <br><br>
+
+        <!-- Tangram JS -->
+        <script src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            let map, userMarker;
+            let debounceTimer;
+            let suggestions = [];
+        
+            document.addEventListener("DOMContentLoaded", function () {
+                map = L.map('map').setView([20.5937, 78.9629], 5);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+            });
+        
+            // Function to handle city search suggestions
+            function debounceSearch() {
+                const cityInput = document.getElementById("city-input").value.trim();
+                if (debounceTimer) {
+                    clearTimeout(debounceTimer);
+                }
+        
+                if (cityInput) {
+                    debounceTimer = setTimeout(() => {
+                        fetchCitySuggestions(cityInput);
+                    }, 300); // 300ms debounce time
+                } else {
+                    document.getElementById("suggestions").style.display = "none";
+                }
+            }
+        
+            // Fetch suggestions from OpenStreetMap
+            function fetchCitySuggestions(query) {
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)},India`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            suggestions = data;
+                            showSuggestions(data);
+                        } else {
+                            document.getElementById("suggestions").style.display = "none";
+                        }
+                    })
+                    .catch(() => {
+                        document.getElementById("suggestions").style.display = "none";
+                    });
+            }
+        
+            // Display suggestions in a dropdown
+            function showSuggestions(data) {
+                const suggestionsDiv = document.getElementById("suggestions");
+                suggestionsDiv.innerHTML = "";
+        
+                data.forEach(city => {
+                    const div = document.createElement("div");
+                    div.textContent = city.display_name;
+                    div.style.padding = "10px";
+                    div.style.cursor = "pointer";
+                    div.addEventListener("click", () => selectSuggestion(city));
+        
+                    suggestionsDiv.appendChild(div);
+                });
+        
+                suggestionsDiv.style.display = "block";
+            }
+        
+            // Select a suggestion from the list
+            function selectSuggestion(city) {
+                document.getElementById("city-input").value = city.display_name;
+                document.getElementById("suggestions").style.display = "none";
+                searchMarkets(city.display_name); // Trigger search after selecting a suggestion
+            }
+        
+            // Function to search for markets based on city name
+            function searchMarkets() {
+                let city = document.getElementById("city-input").value.trim();
+                if (!city) {
+                    alert("Please enter a city name.");
+                    return;
+                }
+        
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)},India`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            updateMap(parseFloat(data[0].lat), parseFloat(data[0].lon), city);
+                        } else {
+                            alert("City not found in India.");
+                        }
+                    });
+            }
+        
+            // Function to get the user's location and show on map
+            function getUserLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        updateMap(position.coords.latitude, position.coords.longitude, "You are here");
+                    });
+                }
+            }
+        
+            // Update map with a marker
+            function updateMap(lat, lon, label) {
+                map.setView([lat, lon], 12);
+                if (userMarker) map.removeLayer(userMarker);
+                userMarker = L.marker([lat, lon]).addTo(map).bindPopup(`<b>${label}</b>`).openPopup();
+                findMarkets(lat, lon);
+            }
+        
+            // Function to find nearby agricultural markets using Overpass API
+            function findMarkets(lat, lon) {
+                let query = `
+                    [out:json];
+                    area[name="India"]->.searchArea;
+                    (
+                        node["shop"="wholesale"](around.searchArea:50000, ${lat}, ${lon});
+                        node["shop"="agrarian"](around.searchArea:50000, ${lat}, ${lon});
+                        node["shop"="farm"](around.searchArea:50000, ${lat}, ${lon});
+                        node["shop"="greengrocer"](around.searchArea:50000, ${lat}, ${lon});
+                        node["shop"="trading"](around.searchArea:50000, ${lat}, ${lon});
+                    );
+                    out;
+                `;
+        
+                let url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+        
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        let marketList = document.getElementById("market-list");
+                        marketList.innerHTML = "";
+                        if (!data.elements.length) {
+                            marketList.innerHTML = "<p>No valuable agricultural shops found within 50 km.</p>";
+                            return;
+                        }
+        
+                        data.elements.forEach(shop => {
+                            let shopName = shop.tags.name || "Unnamed Buyer";
+                            let shopType = shop.tags.shop || "Agricultural Trader";
+                            let address = shop.tags["addr:street"] ? `${shop.tags["addr:street"]}, ${shop.tags["addr:city"] || ""}` : "Address not available";
+                            let contact = shop.tags.phone || "Contact not available";
+                            let description = shop.tags.description || "Wholesale buyer of farm produce.";
+        
+                            let distance = getDistance(lat, lon, shop.lat, shop.lon);
+                            let rating = (Math.random() * 2 + 3).toFixed(1);
+        
+                            L.marker([shop.lat, shop.lon]).addTo(map)
+                                .bindPopup(`<b>${shopName}</b><br>Type: ${shopType}<br>Address: ${address}<br>Contact: ${contact}<br>${description}<br>Distance: ${distance} km<br>Rating: ⭐${rating}`);
+        
+                            let storeContainer = document.createElement("div");
+                            storeContainer.className = "store-container";
+                            storeContainer.innerHTML = `
+                                <p><b>${shopName}</b></p>
+                                <p>Type: ${shopType}</p>
+                                <p><b>Address:</b> ${address}</p>
+                                <p><b>Contact:</b> ${contact}</p>
+                                <p>${description}</p>
+                                <p><b>Distance:</b> ${distance} km</p>
+                                <p><b>Rating:</b> ⭐${rating}</p>
+                            `;
+                            marketList.appendChild(storeContainer);
+                        });
+                    });
+            }
+        
+            // Calculate distance between two geographical coordinates
+            function getDistance(lat1, lon1, lat2, lon2) {
+                let R = 6371; // Radius of the Earth in km
+                let dLat = (lat2 - lat1) * Math.PI / 180;
+                let dLon = (lon2 - lon1) * Math.PI / 180;
+                let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                return (R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))).toFixed(2);
+            }
+        </script>
+        
+    </main>
+
+
+    <footer id="footer" class="footer dark-background">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">AgriCulture</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p>A108 Adam Street</p>
+                            <p>New York, NY 535022</p>
+                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Product Management</a></li>
+                            <li><a href="#">Marketing</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Hic solutasetp</h4>
+                        <ul>
+                            <li><a href="#">Molestiae accusamus iure</a></li>
+                            <li><a href="#">Excepturi dignissimos</a></li>
+                            <li><a href="#">Suscipit distinctio</a></li>
+                            <li><a href="#">Dilecta</a></li>
+                            <li><a href="#">Sit quas consectetur</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Nobis illum</h4>
+                        <ul>
+                            <li><a href="#">Ipsam</a></li>
+                            <li><a href="#">Laudantium dolorum</a></li>
+                            <li><a href="#">Dinera</a></li>
+                            <li><a href="#">Trodelas</a></li>
+                            <li><a href="#">Flexo</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright text-center">
+            <div
+                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+                <div class="d-flex flex-column align-items-center align-items-lg-start">
+                    <div>
+                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        <!-- All the links in the footer should remain intact. -->
+                        <!-- You can delete the links only if you purchased the pro version. -->
+                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+
+                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

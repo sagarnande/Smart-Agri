@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Government Schema</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: AgriCulture
+  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<style>
+
+</style>
+
+<body class="about-page">
+    <header id="header" class="header d-flex align-items-center position-relative">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="AgriCulture">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="{{ url_for('services') }}">Our Services</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                </ul>
+
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/schema.jpg);">
+            <div class="container position-relative">
+                <h1>Government Schemes </h1>
+                <p>Empowering the farming by using various subsidies and Schemes</p>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="current">Scheme</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+        <!-- About 3 Section -->
+        <section id="about-3" class="about-3 section">
+
+            <div class="container">
+                <div class="row gy-4 justify-content-between align-items-center">
+                    <div class="col-lg-6 order-lg-2 position-relative" data-aos="zoom-out">
+                        <img src="assets/img/Farmer using digital tablet in corn crop cultivated field with smart farming interface icons and light flare sunset effect_ Smart and new technology for agriculture business concept. Stock Photo"
+                            alt="Image" class="img-fluid">
+                        <a href="video.mp4" class="glightbox pulsating-play-btn">
+                            <span class="play"><i class="bi bi-play-fill"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="content-title mb-4">Why the Government Schema is necessary to farmers : </h2>
+                        <p class="mb-4">
+                            Government schemes for agriculture provide financial aid, subsidies, crop insurance, and
+                            access to modern technology. They support irrigation, storage, and transport infrastructure
+                            while promoting sustainable and organic farming. These schemes boost rural employment,
+                            improve productivity, and ensure food security,
+                            helping farmers increase their income and contribute to the economy.
+                        </p>
+
+                        <p><a href="#" class="btn-cta">Get in touch</a></p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /About 3 Section -->
+
+
+        <!-- Search Schema Section -->
+        <section id="search-schema" class="search-schema section">
+            <div class="container section-title">
+                <h2>Search Government Schemes</h2>
+                <p>Find the best government schemes for farmers</p>
+            </div>
+
+            <div class="container">
+                <div class="search-bar mb-4">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search for a schema..."
+                        onkeyup="filterSchemas()">
+                </div>
+                <div id="schemaResults"></div> <!-- Results will be displayed here -->
+            </div>
+        </section>
+
+        <!-- JavaScript for Filtering Schemas -->
+        <!-- JavaScript for Filtering Schemas -->
+        <script>
+
+            function filterSchemas() {
+                let input = document.getElementById("searchInput").value.toLowerCase();
+
+                if (input.length === 0) {
+                    document.getElementById("schemaResults").innerHTML = "";
+                    return;
+                }
+
+                fetch(`/search?query=${input}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        let output = "";
+                        if (data.length > 0) {
+                            data.forEach(schema => {
+                                output += `
+                    <div class="schema-item">
+                        <h4 style="font-size: 20px;">${schema.scheme_name}</h4>
+                        <p><strong>Description:</strong> ${schema.description}</p>
+                         <p><strong>Eligibility Criteria:</strong> ${schema.eligibility_criteria}</p>
+                        <p><strong>Required Documents:</strong> ${schema.required_documents}</p>
+                        <p><strong>Application Link:</strong> <a href="${schema.application_link}" target="_blank" rel="noopener noreferrer">Apply Here</a></p>
+
+                        <br> 
+                    </div>`;
+                            });
+                        } else {
+                            output = "<p>No matching schemes found.</p>";
+                        }
+                        document.getElementById("schemaResults").innerHTML = output;
+                    })
+                    .catch(error => console.error("Error fetching data:", error));
+            }
+        </script>
+
+
+
+        <!-- Services Section -->
+        <section id="services" class="services section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Schemes</h2>
+                <p>Providing the best schemes for farmers</p>
+            </div><!-- End Section Title -->
+            <div class="content">
+                <div class="container">
+                    <div class="row g-0">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">01</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">National Mission on Natural Farming (NMNF)
+                                    </h3>
+                                    <p>
+                                        This mission promotes sustainable agriculture practices by providing financial
+                                        assistance of ₹12,200 per
+                                        hectare over three years. The funds support cluster formation, capacity
+                                        building, and continuous guidance by trained personnel, aiming to cover 12 lakh
+                                        hectares across various states.
+                                    </p>
+                                    <a href="https://naturalfarming.dac.gov.in/ ">Click
+                                        here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">02</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">Agriculture Infrastructure Fund (AIF)
+                                    </h3>
+                                    <p>
+                                        AIF offers medium to long-term debt financing facilities for investment in
+                                        viable projects for post-harvest management infrastructure and community farming
+                                        assets.
+                                        This initiative aims to improve agricultural infrastructure and supply chains.
+                                    </p>
+                                    <a href="">Click here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">03</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">Agri-Clinics and Agri-Business Centres (ACABC) Scheme
+                                    </h3>
+                                    <p>
+                                        This scheme aims to supplement the efforts of public extension by providing
+                                        extension and other services to farmers on payment basis or free of cost as per
+                                        business model of agri-preneur, local needs and affordability of target
+                                        group of farmers.
+                                    </p>
+                                    <a href="https://www.nabard.org/content1.aspx?id=595&catid=23&mid=23 ">Click here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">04</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">Kisan Credit Card (KCC)
+                                    </h3>
+                                    <p>
+                                        The Kisan Credit Card (KCC) Scheme is an initiative by the Government of India that provides farmers with timely and affordable 
+                                        credit for agricultural and allied activities. Introduced by the NABARD (National Bank for Agriculture and Rural Development) in 1998, 
+                                       
+                                    </p>
+                                    <a href="https://www.nabard.org/content1.aspx?catid=23&id=23&mid=530
+                                    ">Click here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">05</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">Rashtriya Krishi Vikas Yojana (RKVY)
+                                    </h3>
+                                    <p>
+                                        Initiated in 2007, RKVY is an umbrella scheme aimed at ensuring holistic
+                                        development of agriculture and allied sectors. It incentivizes states to
+                                        increase public investment in agriculture, promoting growth and
+                                        sustainability in the sector.
+                                    </p>
+                                    <a href="https://rkvy.da.gov.in/">Click here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="service-item">
+                                <span class="number">06</span>
+                                <div class="service-item-content">
+                                    <h3 class="service-heading">PMFBY (Pradhan Mantri Fasal Bima Yojana) </h3>
+                                    <p>
+                                        PMFBY (Pradhan Mantri Fasal Bima Yojana) is a crop insurance scheme that
+                                        provides financial protection to farmers
+                                        against crop failure due to natural disasters, pests, or diseases. The scheme
+                                        covers all food and cash crops. It offers low premiums with high coverage,
+                                        making it affordable for farmers.
+                                    </p>
+                                    <a href="https://pmfby.gov.in/ ">Click here for apply</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section><!-- /Services Section -->
+
+
+
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">AgriCulture</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p>A108 Adam Street</p>
+                            <p>New York, NY 535022</p>
+                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Product Management</a></li>
+                            <li><a href="#">Marketing</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Hic solutasetp</h4>
+                        <ul>
+                            <li><a href="#">Molestiae accusamus iure</a></li>
+                            <li><a href="#">Excepturi dignissimos</a></li>
+                            <li><a href="#">Suscipit distinctio</a></li>
+                            <li><a href="#">Dilecta</a></li>
+                            <li><a href="#">Sit quas consectetur</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Nobis illum</h4>
+                        <ul>
+                            <li><a href="#">Ipsam</a></li>
+                            <li><a href="#">Laudantium dolorum</a></li>
+                            <li><a href="#">Dinera</a></li>
+                            <li><a href="#">Trodelas</a></li>
+                            <li><a href="#">Flexo</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright text-center">
+            <div
+                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+                <div class="d-flex flex-column align-items-center align-items-lg-start">
+                    <div>
+                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        <!-- All the links in the footer should remain intact. -->
+                        <!-- You can delete the links only if you purchased the pro version. -->
+                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+
+                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

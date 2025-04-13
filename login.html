@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Login - AgriCulture Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .btn-custom {
+  width: 100%;
+  padding: 10px;
+  background-color: #065318;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px; /* Adds space */
+}
+
+    .btn-custom-half {
+      width: 48%;
+      padding: 10px;
+      background-color: #065318;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .container h2 {
+      font-size: 32px;
+    }
+    .whyproduct {
+      text-align: center;
+      margin: 55px;
+    }
+  </style>
+</head>
+
+<body class="contact-page">
+  <header id="header" class="header d-flex align-items-center position-relative">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="AgriCulture">
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('products') }}">Products</a></li>
+          <li><a href="{{ url_for('services') }}">Our Services</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+          <li><a href="{{ url_for('login') }}">Log in</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/contact.jpg);">
+      <div class="container position-relative">
+        <h1>Login</h1>
+        <p>Home / Login</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li class="current">Login</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    
+    <section id="login" class="contact section">
+      <div data-aos="fade">
+        <div class="container">
+          <div class="whyproduct">
+            <h2 class="content-title mb-4">Login to our website </h2>
+            <p>
+              Welcome back! Log in to access your account and explore our latest agricultural solutions. 
+              By logging in, you can track orders, access personalized recommendations, and stay updated on 
+              the latest innovations in farming technology. Enjoy a seamless experience tailored to your needs!
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <!-- Login Form -->
+            <form id="loginForm">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group mt-3">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn-custom">Login</button>
+              </div>
+            </form>
+        
+            <!-- Other Buttons -->
+            <div class="d-flex justify-content-between mt-3">
+              <a href="{{url_for('forgotpass')}}" class="btn-custom-half">Forgot Password</a>
+              <a href="{{url_for('signup')}}" class="btn-custom-half">Create Account</a>
+            </div>
+          </div>
+        </div>
+      </section>    
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission
+  
+      // Get form data
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+  
+      // Send data to the server using fetch
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status === 'success') {
+            window.location.href = result.redirect_url; // Redirect on success
+          } else {
+            alert(result.error || 'Login failed'); // Show error message
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        });
+    });
+  </script>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container text-center">
+      <p>© Copyright <strong>AgriCulture</strong>. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+</body>
+
+</html>

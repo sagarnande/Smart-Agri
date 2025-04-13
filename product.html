@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Product</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <style>
+    /* General Styles */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+    
+    #searchInput {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .search-bar-container button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .search-bar-container button:hover {
+        background-color: #218838;
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .tab-button {
+        flex: 1 1 25%;
+        max-width: 25%;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .tab-button.active {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .tab-button:hover {
+        background-color: #ddd;
+    }
+    
+    .tab-content-active {
+        display: flex;
+        flex-wrap: wrap;
+      
+     
+    }
+    
+    .product-card {
+        height: 300px;
+        width: 400px;
+       margin: 30px;
+
+    }
+    
+
+    .product-image {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .whyproduct {
+        text-align: center;
+        margin: 75px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    
+    .prodcutsearch {
+        text-align: center;
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+    
+    #searchInput {
+        padding: 10px;
+        width: 550px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    
+    .search-button {
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .search-button:hover {
+        background-color: #218838;
+    }
+    
+    @media (max-width: 600px) {
+        .whyproduct,
+        .prodcutsearch {
+            margin: 10px;
+            padding: 15px;
+        }
+    }
+    
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .content-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+    }
+    
+    .tab-name {
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        color: var(--nav-dropdown-color);
+    }
+  </style>
+</head>
+
+<body class="about-page">
+    <header id="header" class="header d-flex align-items-center position-relative">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="AgriCulture">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="{{ url_for('services') }}">Our Services</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/product.jpeg);">
+        <div class="container position-relative">
+            <h1>Products</h1>
+            <p>Provide the products for farmers and places to buy those products</p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="current">Product</li>
+                </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+
+    <div class="whyproduct">
+        <h2 class="content-title mb-4">Provide some agricultural products </h2>
+        <p class="mb-4">
+            Supporting farmers with quality products is crucial for agricultural success. Modern tools, high-quality
+            seeds, fertilizers, and advanced machinery help farmers increase productivity, reduce labor, and enhance
+            crop quality. Sustainable farming products also ensure long-term environmental health while boosting
+            profitability.
+            By equipping farmers with the right resources, we contribute to food security and economic growth.
+        </p>
+    </div>
+
+    <div class="prodcutsearch">
+        <h2>Search Product for Farming</h2>
+        <p>Provide the best products for farmers</p>
+    </div>
+
+    
+    <main class="main">
+
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('seeds')">Seeds</button>
+            <button class="tab-button" onclick="openTab('fertilizers')">Fertilizers</button>
+            <button class="tab-button" onclick="openTab('pesticides')">Pesticides</button>
+            <button class="tab-button" onclick="openTab('tools')">Tools & Equipment</button>
+            <button class="tab-button" onclick="openTab('irrigation')">Irrigation</button>
+            <button class="tab-button" onclick="openTab('machinery')">Machinery</button>
+            <button class="tab-button" onclick="openTab('livestock')">Livestock</button>
+            <button class="tab-button" onclick="openTab('greenhouse')">Greenhouse</button>
+            <button class="tab-button" onclick="openTab('organic')">Organic Products</button>
+        </div> <br><br>
+
+        <!-- Tab Name Display -->
+        <!-- Tab Name Display -->
+        <div class="title">
+            <h2 class="content-title mb-4">Some farming products</h2>
+            <div id="tabName" class="tab-name"
+                style="font-family: 'Poppins', sans-serif; font-size: 20px; color: var(--nav-dropdown-color);"></div>
+        </div>
+
+        <!-- Seeds Tab -->
+<div id="seeds" class="tab-content-active active">
+    <div class="product-card">
+        <img src="assets/img/icons/tomato-svgrepo-com.svg" alt="Tomato Seeds" class="product-image">
+        <h3 class="product-title">Organic Tomato Seeds</h3>
+        <p class="product-price">$4.99/pack</p>
+        <p class="product-description">Non-GMO, heirloom tomato seeds for a rich, juicy harvest.</p>
+        <a href="https://www.burpee.com/vegetables/tomato-seeds/organic-tomato-seeds-prod1000001.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/carrot-svgrepo-com.svg" alt="Carrot Seeds" class="product-image">
+        <h3 class="product-title">Carrot Seeds</h3>
+        <p class="product-price">$3.99/pack</p>
+        <p class="product-description">Sweet and crunchy variety, perfect for home gardens.</p>
+        <a href="https://www.edenbrothers.com/store/carrot_seeds.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/lettuce-svgrepo-com.svg" alt="Lettuce Seeds" class="product-image">
+        <h3 class="product-title">Lettuce Seeds</h3>
+        <p class="product-price">$2.99/pack</p>
+        <p class="product-description">Fast-growing lettuce seeds for fresh salads all year.</p>
+        <a href="https://www.trueleafmarket.com/products/lettuce-seeds" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/sweet-corn-svgrepo-com.svg" alt="Corn Seeds" class="product-image">
+        <h3 class="product-title">Sweet Corn Seeds</h3>
+        <p class="product-price">$5.99/pack</p>
+        <p class="product-description">High-yield variety with a deliciously sweet flavor.</p>
+        <a href="https://www.burpee.com/vegetables/corn-seeds/sweet-corn-seeds-prod1000002.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/sunflower-svgrepo-com.svg" alt="Sunflower Seeds" class="product-image">
+        <h3 class="product-title">Sunflower Seeds</h3>
+        <p class="product-price">$6.50/pack</p>
+        <p class="product-description">Bright, cheerful flowers that attract pollinators.</p>
+        <a href="https://www.edenbrothers.com/store/sunflower_seeds.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/pumpkin-food-2-svgrepo-com.svg" alt="Pumpkin Seeds" class="product-image">
+        <h3 class="product-title">Pumpkin Seeds</h3>
+        <p class="product-price">$4.50/pack</p>
+        <p class="product-description">Grow large pumpkins for baking, decoration, or carving.</p>
+        <a href="https://www.trueleafmarket.com/products/pumpkin-seeds" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="assets/img/icons/basil-svgrepo-com (1).svg" alt="Basil Seeds" class="product-image">
+        <h3 class="product-title">Organic Basil Seeds</h3>
+        <p class="product-price">$3.49/pack</p>
+        <p class="product-description">Fresh, aromatic basil perfect for your garden and kitchen.</p>
+        <a href="https://www.gardeners.com/buy/organic-basil-seeds/8584420.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Cucumber Seeds" class="product-image">
+        <h3 class="product-title">Cucumber Seeds</h3>
+        <p class="product-price">$2.99/pack</p>
+        <p class="product-description">Vibrant green cucumbers ideal for fresh salads and pickling.</p>
+        <a href="https://www.seedman.com/cucumber-seeds.htm" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Fertilizers Tab -->
+<div id="fertilizers" class="tab-content-active">
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Fertilizer" class="product-image">
+        <h3 class="product-title">Organic Fertilizer</h3>
+        <p class="product-price">$19.99/bag</p>
+        <p class="product-description">Rich, natural fertilizer that enhances soil health and promotes plant growth.</p>
+        <a href="https://www.espoma.com/products/organic-fertilizer/" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Liquid Fertilizer" class="product-image">
+        <h3 class="product-title">Liquid Fertilizer</h3>
+        <p class="product-price">$14.99/bottle</p>
+        <p class="product-description">A fast-acting liquid fertilizer for instant plant nutrition.</p>
+        <a href="https://www.fossilfarm.com/liquid-fertilizer" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Compost Fertilizer" class="product-image">
+        <h3 class="product-title">Compost Fertilizer</h3>
+        <p class="product-price">$22.99/bag</p>
+        <p class="product-description">A nutrient-rich compost fertilizer for sustainable gardening.</p>
+        <a href="https://www.composters.com/compost-fertilizer" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Bone Meal Fertilizer" class="product-image">
+        <h3 class="product-title">Bone Meal Fertilizer</h3>
+        <p class="product-price">$12.99/bag</p>
+        <p class="product-description">Rich in phosphorus and calcium, ideal for flowering plants.</p>
+        <a href="https://www.amaon.com/bone-meal-fertilizer" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Fish Emulsion Fertilizer" class="product-image">
+        <h3 class="product-title">Fish Emulsion Fertilizer</h3>
+        <p class="product-price">$16.99/bottle</p>
+        <p class="product-description">An organic, nutrient-dense fertilizer that boosts plant growth.</p>
+        <a href="https://www.gardeners.com/buy/fish-emulsion-fertilizer/8584420.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Slow Release Fertilizer" class="product-image">
+        <h3 class="product-title">Slow Release Fertilizer</h3>
+        <p class="product-price">$18.50/bag</p>
+        <p class="product-description">Long-lasting fertilizer that provides gradual nutrient release.</p>
+        <a href="https://www.fertilizer.com/slow-release-fertilizer" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Worm Castings Fertilizer" class="product-image">
+        <h3 class="product-title">Worm Castings Fertilizer</h3>
+        <p class="product-price">$24.99/bag</p>
+        <p class="product-description">Highly nutrient-rich organic fertilizer made from worm castings.</p>
+        <a href="https://www.gardeners.com/buy/worm-castings-fertilizer/8584420.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Humic Acid Fertilizer" class="product-image">
+        <h3 class="product-title">Humic Acid Fertilizer</h3>
+        <p class="product-price">$28.50/bottle</p>
+        <p class="product-description">Enhances nutrient uptake and soil structure for better plant health.</p>
+        <a href="https://www.humicacid.com/humic-acid-fertilizer" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Pesticides Tab -->
+<div id="pesticides" class="tab-content-active">
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Neem Oil Spray" class="product-image">
+        <h3 class="product-title">Organic Neem Oil Spray</h3>
+        <p class="product-price">$12.99/bottle</p>
+        <p class="product-description">Natural, multi-purpose pest control solution safe for organic gardening.</p>
+        <a href="https://www.arbico-organics.com/category/organic-pest-control" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Insecticidal Soap" class="product-image">
+        <h3 class="product-title">Insecticidal Soap</h3>
+        <p class="product-price">$14.99/bottle</p>
+        <p class="product-description">Eco-friendly insecticide effective on a variety of pests.</p>
+        <a href="https://www.amazon.com/Insecticidal-Soap" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Pyrethrum Pesticide" class="product-image">
+        <h3 class="product-title">Pyrethrum Pesticide</h3>
+        <p class="product-price">$17.50/bottle</p>
+        <p class="product-description">An organic pesticide made from chrysanthemum flowers, great for pests.</p>
+        <a href="https://www.planetnatural.com/product/pyrethrum-spray/" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Diatomaceous Earth" class="product-image">
+        <h3 class="product-title">Diatomaceous Earth</h3>
+        <p class="product-price">$20.99/bag</p>
+        <p class="product-description">Natural powder that kills pests by dehydrating them.</p>
+        <a href="https://www.diatomaceous-earth.com/" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Bacillus Thuringiensis" class="product-image">
+        <h3 class="product-title">Bacillus Thuringiensis</h3>
+        <p class="product-price">$18.99/bottle</p>
+        <p class="product-description">A biological insecticide used to target caterpillars and worms.</p>
+        <a href="https://www.amazon.com/Bacillus-Thuringiensis" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Garlic Insect Repellent" class="product-image">
+        <h3 class="product-title">Garlic Insect Repellent</h3>
+        <p class="product-price">$13.99/bottle</p>
+        <p class="product-description">Organic, plant-based insect repellent safe for edible gardens.</p>
+        <a href="https://www.gardeners.com/buy/garlic-insect-repellent/8578505.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Citrus Oil Insecticide" class="product-image">
+        <h3 class="product-title">Citrus Oil Insecticide</h3>
+        <p class="product-price">$15.50/bottle</p>
+        <p class="product-description">Citrus oil-based pesticide that eliminates a wide range of pests.</p>
+        <a href="https://www.planetnatural.com/product/citrus-oil-insecticide/" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Pest Repelling Granules" class="product-image">
+        <h3 class="product-title">Pest Repelling Granules</h3>
+        <p class="product-price">$11.99/bag</p>
+        <p class="product-description">Granules that deter pests like rodents, ants, and more.</p>
+        <a href="https://www.gardeners.com/buy/pest-repelling-granules/8569360.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Slug and Snail Control" class="product-image">
+        <h3 class="product-title">Slug and Snail Control</h3>
+        <p class="product-price">$9.99/bottle</p>
+        <p class="product-description">An effective solution for controlling slugs and snails in your garden.</p>
+        <a href="https://www.gardeners.com/buy/slug-and-snail-control/8584420.html" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+    <!-- Tools & Equipment Tab -->
+<div id="tools" class="tab-content-active">
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Shovel" class="product-image">
+        <h3 class="product-title">Garden Shovel</h3>
+        <p class="product-price">$19.99</p>
+        <p class="product-description">Durable garden shovel designed for digging, planting, and more.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Hand Trowel" class="product-image">
+        <h3 class="product-title">Hand Trowel</h3>
+        <p class="product-price">$12.99</p>
+        <p class="product-description">Perfect for planting, digging, and weeding with ease.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Rake" class="product-image">
+        <h3 class="product-title">Garden Rake</h3>
+        <p class="product-price">$16.50</p>
+        <p class="product-description">Heavy-duty rake ideal for leveling soil and clearing leaves.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Pruning Shears" class="product-image">
+        <h3 class="product-title">Pruning Shears</h3>
+        <p class="product-price">$22.99</p>
+        <p class="product-description">Sharp and precise shears for cutting branches and flowers.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Hoe" class="product-image">
+        <h3 class="product-title">Garden Hoe</h3>
+        <p class="product-price">$18.99</p>
+        <p class="product-description">Perfect for breaking up soil and removing weeds efficiently.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Gloves" class="product-image">
+        <h3 class="product-title">Garden Gloves</h3>
+        <p class="product-price">$9.99</p>
+        <p class="product-description">Comfortable and durable gloves to protect your hands while gardening.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Watering Can" class="product-image">
+        <h3 class="product-title">Watering Can</h3>
+        <p class="product-price">$14.99</p>
+        <p class="product-description">Perfect size watering can for indoor and outdoor gardening.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Wheelbarrow" class="product-image">
+        <h3 class="product-title">Wheelbarrow</h3>
+        <p class="product-price">$99.99</p>
+        <p class="product-description">Heavy-duty wheelbarrow for easy transportation of soil, plants, and more.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Irrigation Tab -->
+<div id="irrigation" class="tab-content-active">
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Drip Irrigation Kit" class="product-image">
+        <h3 class="product-title">Drip Irrigation Kit</h3>
+        <p class="product-price">$29.99</p>
+        <p class="product-description">Complete drip irrigation system for efficient watering of plants.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Hose" class="product-image">
+        <h3 class="product-title">Garden Hose</h3>
+        <p class="product-price">$19.99</p>
+        <p class="product-description">Heavy-duty garden hose for watering large areas with ease.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Automatic Sprinkler System" class="product-image">
+        <h3 class="product-title">Automatic Sprinkler System</h3>
+        <p class="product-price">$79.99</p>
+        <p class="product-description">Efficient sprinkler system with automatic timer for your garden.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Water Timer" class="product-image">
+        <h3 class="product-title">Water Timer</h3>
+        <p class="product-price">$14.99</p>
+        <p class="product-description">Programmable timer for controlling the irrigation system.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Soaker Hose" class="product-image">
+        <h3 class="product-title">Soaker Hose</h3>
+        <p class="product-price">$24.99</p>
+        <p class="product-description">Soaker hose for slow, deep watering of garden beds.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Irrigation Pipe" class="product-image">
+        <h3 class="product-title">Irrigation Pipe</h3>
+        <p class="product-price">$34.99</p>
+        <p class="product-description">Durable irrigation pipe for distributing water throughout your garden.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Sprinkler Head" class="product-image">
+        <h3 class="product-title">Sprinkler Head</h3>
+        <p class="product-price">$8.99</p>
+        <p class="product-description">Replacement sprinkler head for your irrigation system.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/81g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Irrigation Pump" class="product-image">
+        <h3 class="product-title">Garden Irrigation Pump</h3>
+        <p class="product-price">$129.99</p>
+        <p class="product-description">Powerful pump to enhance water pressure for your irrigation system.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Machinery Tab -->
+<div id="machinery" class="tab-content-active">
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Tractor" class="product-image">
+        <h3 class="product-title">Tractor</h3>
+        <p class="product-price">$15,999.99</p>
+        <p class="product-description">Heavy-duty tractor for all your farming needs, from plowing to hauling.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Rotary Tiller" class="product-image">
+        <h3 class="product-title">Rotary Tiller</h3>
+        <p class="product-price">$3,499.99</p>
+        <p class="product-description">Powerful tiller for breaking up tough soil in large farming areas.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Mini Excavator" class="product-image">
+        <h3 class="product-title">Mini Excavator</h3>
+        <p class="product-price">$12,499.99</p>
+        <p class="product-description">Compact and versatile mini excavator for digging and landscaping.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Hay Baler" class="product-image">
+        <h3 class="product-title">Hay Baler</h3>
+        <p class="product-price">$7,499.99</p>
+        <p class="product-description">Efficient hay baler for compacting hay into easily manageable bales.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Seeder" class="product-image">
+        <h3 class="product-title">Seeder</h3>
+        <p class="product-price">$2,199.99</p>
+        <p class="product-description">Seeder for uniform planting and efficient crop growth.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Corn Planter" class="product-image">
+        <h3 class="product-title">Corn Planter</h3>
+        <p class="product-price">$8,999.99</p>
+        <p class="product-description">Specialized corn planter for high precision planting of corn seeds.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Power Sprayer" class="product-image">
+        <h3 class="product-title">Power Sprayer</h3>
+        <p class="product-price">$1,299.99</p>
+        <p class="product-description">High-pressure power sprayer for efficient pesticide and herbicide application.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Farm Loader" class="product-image">
+        <h3 class="product-title">Farm Loader</h3>
+        <p class="product-price">$9,899.99</p>
+        <p class="product-description">Heavy-duty loader for handling and moving materials on the farm.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Livestock Tab -->
+<div id="livestock" class="tab-content-active">
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Dairy Cow" class="product-image">
+        <h3 class="product-title">Dairy Cow</h3>
+        <p class="product-price">$1,200.00</p>
+        <p class="product-description">High-quality dairy cow for milk production on your farm.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Beef Cattle" class="product-image">
+        <h3 class="product-title">Beef Cattle</h3>
+        <p class="product-price">$1,500.00</p>
+        <p class="product-description">Premium beef cattle for raising quality beef on your farm.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Sheep" class="product-image">
+        <h3 class="product-title">Sheep</h3>
+        <p class="product-price">$350.00</p>
+        <p class="product-description">Healthy and well-bred sheep for wool and meat production.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Goats" class="product-image">
+        <h3 class="product-title">Goats</h3>
+        <p class="product-price">$450.00</p>
+        <p class="product-description">Raising goats for milk, meat, and fiber production.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Chicken" class="product-image">
+        <h3 class="product-title">Chicken</h3>
+        <p class="product-price">$25.00</p>
+        <p class="product-description">Healthy chickens for egg-laying or meat production.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Turkeys" class="product-image">
+        <h3 class="product-title">Turkeys</h3>
+        <p class="product-price">$40.00</p>
+        <p class="product-description">High-quality turkeys for meat production on your farm.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Pigs" class="product-image">
+        <h3 class="product-title">Pigs</h3>
+        <p class="product-price">$500.00</p>
+        <p class="product-description">Healthy pigs for pork production.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Alpacas" class="product-image">
+        <h3 class="product-title">Alpacas</h3>
+        <p class="product-price">$1,800.00</p>
+        <p class="product-description">Premium alpacas for fiber and breeding.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Greenhouse Tab -->
+<div id="greenhouse" class="tab-content-active">
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Mini Greenhouse" class="product-image">
+        <h3 class="product-title">Mini Greenhouse</h3>
+        <p class="product-price">$150.00</p>
+        <p class="product-description">Perfect for small-scale gardening, this mini greenhouse provides a controlled environment for plants.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Polycarbonate Greenhouse" class="product-image">
+        <h3 class="product-title">Polycarbonate Greenhouse</h3>
+        <p class="product-price">$750.00</p>
+        <p class="product-description">Durable polycarbonate greenhouse for year-round gardening and protection from harsh weather.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Garden Greenhouse Kit" class="product-image">
+        <h3 class="product-title">Garden Greenhouse Kit</h3>
+        <p class="product-price">$220.00</p>
+        <p class="product-description">All-in-one greenhouse kit for gardening enthusiasts, including all parts needed for setup.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Greenhouse Shade Netting" class="product-image">
+        <h3 class="product-title">Greenhouse Shade Netting</h3>
+        <p class="product-price">$30.00</p>
+        <p class="product-description">Provides shade and protection for your greenhouse plants, preventing sunburn and heat stress.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Portable Greenhouse" class="product-image">
+        <h3 class="product-title">Portable Greenhouse</h3>
+        <p class="product-price">$180.00</p>
+        <p class="product-description">Compact and portable greenhouse, ideal for limited space or mobile gardening.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Large Walk-In Greenhouse" class="product-image">
+        <h3 class="product-title">Large Walk-In Greenhouse</h3>
+        <p class="product-price">$1,200.00</p>
+        <p class="product-description">Spacious walk-in greenhouse with ample room for large plants and multiple growing racks.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Greenhouse Heater" class="product-image">
+        <h3 class="product-title">Greenhouse Heater</h3>
+        <p class="product-price">$100.00</p>
+        <p class="product-description">Efficient heater to maintain a warm temperature in your greenhouse during colder months.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71g1g1g1g1L._AC_SL1500_.jpg" alt="Greenhouse Fan" class="product-image">
+        <h3 class="product-title">Greenhouse Fan</h3>
+        <p class="product-price">$50.00</p>
+        <p class="product-description">Ventilation fan for optimal airflow in your greenhouse, preventing overheating and humidity build-up.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<!-- Organic Products Tab -->
+<div id="organic" class="tab-content-active">
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Fertilizer" class="product-image">
+        <h3 class="product-title">Organic Fertilizer</h3>
+        <p class="product-price">$25.99</p>
+        <p class="product-description">Natural, eco-friendly fertilizer that promotes healthy plant growth without synthetic chemicals.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Pest Repellent" class="product-image">
+        <h3 class="product-title">Organic Pest Repellent</h3>
+        <p class="product-price">$12.99</p>
+        <p class="product-description">Safe and non-toxic pest repellent made with all-natural ingredients to protect your garden.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Seedlings" class="product-image">
+        <h3 class="product-title">Organic Seedlings</h3>
+        <p class="product-price">$19.99</p>
+        <p class="product-description">Healthy and certified organic seedlings for starting your garden with chemical-free plants.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Compost Kit" class="product-image">
+        <h3 class="product-title">Compost Kit</h3>
+        <p class="product-price">$35.99</p>
+        <p class="product-description">Turn your kitchen waste into rich organic compost with this easy-to-use composting kit.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Mulch" class="product-image">
+        <h3 class="product-title">Organic Mulch</h3>
+        <p class="product-price">$15.99</p>
+        <p class="product-description">A natural mulch option to help retain moisture, suppress weeds, and improve soil quality.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Herbicide" class="product-image">
+        <h3 class="product-title">Organic Herbicide</h3>
+        <p class="product-price">$18.99</p>
+        <p class="product-description">Eco-friendly herbicide made from natural ingredients to control weeds without harmful chemicals.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Garden Soil" class="product-image">
+        <h3 class="product-title">Organic Garden Soil</h3>
+        <p class="product-price">$20.00</p>
+        <p class="product-description">Rich, fertile soil ideal for organic gardening, free from synthetic fertilizers or pesticides.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+        <img src="/placeholder.svg?height=200&width=300" alt="Organic Plant Food" class="product-image">
+        <h3 class="product-title">Organic Plant Food</h3>
+        <p class="product-price">$14.99</p>
+        <p class="product-description">Nutrient-rich, organic plant food that supports plant health and growth without chemical additives.</p>
+        <a href="https://www.amazon.com/dp/B07F2FQZ5D" target="_blank" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+        <script>
+
+
+            function searchFunction() {
+                var query = document.getElementById('searchInput').value;
+                alert("Searching for: " + query);
+                // You can replace this with your actual search functionality
+            }
+
+            // Function to open a tab and update the tab name display
+            // Function to open a tab and update the tab name display
+      // Function to open a tab and update the tab name display
+function openTab(tabName) {
+    const tabContents = document.querySelectorAll('.tab-content-active');
+    tabContents.forEach(content => {
+        content.style.display = 'none'; // Hide all tab contents
+    });
+
+    const activeTab = document.getElementById(tabName);
+    if (activeTab) {
+        activeTab.style.display = 'flex'; // Show the selected tab content
+    }
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => {
+        button.classList.remove('active'); // Remove active class from all buttons
+    });
+
+    const activeButton = Array.from(tabButtons).find(button => button.textContent.toLowerCase() === tabName);
+    if (activeButton) {
+        activeButton.classList.add('active'); // Activate the clicked button
+    }
+
+    // Update the tab name display
+    const tabNameDisplay = document.getElementById('tabName');
+    tabNameDisplay.textContent = tabName.charAt(0).toUpperCase() + tabName.slice(1); // Capitalize the first letter
+}
+
+// Function to initialize the default tab on page load
+function initializeDefaultTab() {
+    openTab('seeds'); // Set the default tab to 'seeds'
+}
+
+// Call the initialize function when the page loads
+window.onload = initializeDefaultTab;
+
+        </script>
+
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">AgriCulture</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p>A108 Adam Street</p>
+                            <p>New York, NY 535022</p>
+                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Product Management</a></li>
+                            <li><a href="#">Marketing</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Hic solutasetp</h4>
+                        <ul>
+                            <li><a href="#">Molestiae accusamus iure</a></li>
+                            <li><a href="#">Excepturi dignissimos</a></li>
+                            <li><a href="#">Suscipit distinctio</a></li>
+                            <li><a href="#">Dilecta</a></li>
+                            <li><a href="#">Sit quas consectetur</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Nobis illum</h4>
+                        <ul>
+                            <li><a href="#">Ipsam</a></li>
+                            <li><a href="#">Laudantium dolorum</a></li>
+                            <li><a href="#">Dinera</a></li>
+                            <li><a href="#">Trodelas</a></li>
+                            <li><a href="#">Flexo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright text-center">
+            <div
+                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+                <div class="d-flex flex-column align-items-center align-items-lg-start">
+                    <div>
+                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+
+                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--Scroll Top-->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!--Preloader-->
+    <div id="preloader"></div>
+
+    <!--Vendor JS Files-->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

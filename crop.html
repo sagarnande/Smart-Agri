@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Farming Related Business</title>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Marcellus:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .tech {
+        text-align: center;
+        margin: 75px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    @media (max-width: 600px) {
+        .tech,
+        .productsearch {
+            margin: 10px;
+            padding: 15px;
+        }
+    }
+    #get{
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body class="about-page">
+  <header id="header" class="header d-flex align-items-center position-relative">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" alt="AgriCulture">
+        </a>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+              <li><a href="{{ url_for('home') }}">Home</a></li>
+              <li><a href="{{ url_for('about') }}">About Us</a></li>
+              <li><a href="{{ url_for('services') }}">Our Services</a></li>
+              <li><a href="{{ url_for('contact') }}">Contact</a></li>
+              <li><a href="{{ url_for('login') }}">Log in</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/crop2.jpg);">
+      <div class="container position-relative">
+        <h1>Cropping</h1>
+        <p>Producing higher crop yield with expert guidance</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li class="current">Cropping</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- About Section -->
+    <section id="about-crop" class="about-3 section">
+        <div class="tech">
+            <h2 class="content-title mb-4">Gaining Higher Crop Yield with Proper Guidance</h2>
+            <p class="mb-4">
+                Our Cropping Agri Service helps farmers maximize their yield and profitability through expert guidance, scientific techniques, and sustainable farming practices. Whether you are a small-scale farmer or managing large agricultural land, we provide step-by-step assistance to improve crop production.
+                <br><br>
+                Factors considered: <strong>Area, Season, Soil Type, pH Level, Temperature, Fertilizer Usage, Rainfall.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Crop Guidance Form -->
+    <section id="crop-guidance" class="about-3 section">
+        <div class="container">
+            <h2 class="content-title mb-4 text-center">Get Crop Guidance</h2>
+            <p class="text-center">Enter your details to receive the best guidance for your crops.</p>
+            
+            <form id="cropForm" class="crop-form" method="POST">
+                <div class="row gy-3">
+                    <div class="col-md-4">
+                        <label for="cropName" class="form-label">Crop Name</label>
+                        <input type="text" class="form-control" id="cropName" name="cropName" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="location" class="form-label">Location (State)</label>
+                        <input type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="landSize" class="form-label">Total Land Size (in acres)</label>
+                        <input type="number" class="form-control" id="landSize" name="landSize" required>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary" id="get">Get Info</button>
+                </div>
+            </form>
+            
+            <div id="cropResult" class="mt-4 text-center"></div>
+        </div>
+    </section>   
+
+</main>
+
+<!-- Footer -->
+<footer id="footer" class="footer dark-background">
+  <div class="copyright text-center">
+    <div class="container">
+      <div>© Copyright <strong>AgriCulture</strong>. All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+<!-- Main JS File -->
+<script src="assets/js/main.js"></script>
+
+<script>
+  document.getElementById("cropForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let cropName = document.getElementById("cropName").value.trim();
+      let location = document.getElementById("location").value.trim();
+      let landSize = document.getElementById("landSize").value.trim();
+
+      if (!cropName || !location || !landSize) {
+          document.getElementById("cropResult").innerHTML = '<p class="text-danger">⚠ All fields are required!</p>';
+          return;
+      }
+
+      fetch('/crop', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cropName, location, landSize })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.error) {
+              document.getElementById("cropResult").innerHTML = `<p class="text-danger">${data.error}</p>`;
+          } else {
+              document.getElementById("cropResult").innerHTML = `
+                  <h4>Crop Guidance for ${data.crop}</h4>
+                  <p><strong>Season:</strong> ${data.season}</p>
+                  <p><strong>Soil Type:</strong> ${data.soil_type}</p>
+                  <p><strong>pH Level:</strong> ${data.ph}</p>
+                  <p><strong>Temperature:</strong> ${data.temperature}°C</p>
+                  <p><strong>Fertilizer Usage:</strong> ${data.fertilizer_usage}</p>
+                  <p><strong>Rainfall:</strong> ${data.rainfall} mm</p>
+                  <p><strong>Pesticide Usage:</strong> ${data.pesticide_usage}</p>
+                  <p><strong>Market Price:</strong> ₹${data.price}</p>
+                  <p><strong>Location:</strong> ${data.state}</p>
+                  <hr>
+                  <h5>🌱 Guidance:</h5>
+                  <p>${data.guidance}</p>
+              `;
+          }
+      })
+      .catch(error => {
+          document.getElementById("cropResult").innerHTML = `<p class="text-danger">⚠ An error occurred: ${error.message}</p>`;
+      });
+  });
+</script>
+
+</body>
+</html>
